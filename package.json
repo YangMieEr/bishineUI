@@ -1,6 +1,73 @@
 {
   "name": "bishineui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
+    "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js"
+  },
+  "jest": {
+    "verbose": true,
+    "clearMocks": false,
+    "collectCoverage": true,
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/file-mock.js",
+      "\\.(css|less|sass|scss)$": "<rootDir>/test/__mocks__/object-mock.js"
+    },
+    "testMatch": [
+      "<rootDir>/**/__test__/**/*.unit.(js|jsx|ts|tsx)"
+    ],
+    "transform": {
+      "^.+unit\\.(js|jsx)$": "babel-jest",
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>test/setupTests.js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-test-renderer": "^16.8.3",
+    "babel-jest": "^24.8.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.1.0",
+    "enzyme": "^3.10.0",
+    "file-loader": "^4.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "jest-junit": "^7.0.0",
+    "node-sass": "^4.12.0",
+    "react-test-renderer": "^16.8.6",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.15",
+    "awesome-typescript-loader": "^5.2.1",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "ts-jest": "^24.0.2"
+  }
 }
